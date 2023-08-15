@@ -1,0 +1,7 @@
+replicaCount: 2
+image:
+  repository: aakashindia/ui_apps
+  tag: v1.0
+service:
+  enabled: true
+  port: 80
