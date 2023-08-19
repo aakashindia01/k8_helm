@@ -1,19 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-angular-app
+  name: {{ .Values.projectName }}-deployment
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: angular-app
+      app: {{ .Values.label }}
   template:
     metadata:
       labels:
-        app: angular-app
+        app: {{ .Values.label }}
     spec:
       containers:
-        - name: angular-app
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        - name: {{ .Values.containers.name }}
+          image: {{ .Values.containers.image.repository }}
           ports:
-            - containerPort: 80
+            - containerPort: {{ .Values.service.ports.port }}
+
+

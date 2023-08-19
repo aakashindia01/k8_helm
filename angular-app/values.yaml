@@ -1,7 +1,15 @@
 replicaCount: 2
-image:
-  repository: aakashindia/ui_apps
-  tag: v1.0
+projectName: angular-app
+label: angular-app
+containers:
+  name: angular-app
+  image:
+    repository: aakashindia/ui_apps
+    tag: v1.0
 service:
+  type: NodePort
   enabled: true
-  port: 80
+  ports:
+    port: 80
+    targetPort: 80
+    nodePort: 30008

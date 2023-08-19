@@ -1,11 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-angular-app-service
+  name: {{ .Values.projectName }}-service
 spec:
+  type: {{ .Values.service.type }}
   selector:
-    app: angular-app
+    app: {{ .Values.label }}
   ports:
-    - protocol: TCP
-      port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.port }}
+      # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
+    - port: {{ .Values.service.ports.port }}
+      targetPort: {{ .Values.service.ports.targetPort }}
+      # Optional field
+      # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
+      nodePort: {{ .Values.service.ports.nodePort }}
